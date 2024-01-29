@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program 2</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="myShoppingList" ng-controller="myCtrl">
+        <ul>
+            <li ng-repeat="x in products">{{x}} <span ng-click="removeItem($index)">x</span></li>
+        </ul>
+        <input type="text" ng-model="addMe">
+        <button ng-click="addItem()">add</button>
+        <p>{{error}}</p>
+    </div>
+    <p>Try to add same item twice, you will get an error message</p>
+    <script>
+        var app = angular.module("myShoppingList", []);
+        app.controller("myCtrl", ($scope)=>{
+            $scope.products = ["milk", "bread", "cheese"];
+            $scope.addItem = () =>{
+                $scope.error = "";
+                if(!$scope.addMe){return;}
+                if ($scope.products.indexOf($scope.addMe) == -1) {
+                    $scope.products.push($scope.addMe);
+                } else {
+                    $scope.error = "Item is already in the shopping list";
+                }
+            }
+            $scope.removeItem = (x) =>{
+                $scope.error = "";
+                $scope.products.splice(x, 1);
+            }
+        })
+    </script>
+</body>
+
+</html>
