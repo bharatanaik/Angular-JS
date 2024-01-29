@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program 4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+</head>
+<body ng-app="mySqFct">
+    <h3>Angular JS Factorial and Square Application</h3>
+    <div ng-controller="mySqFctCtrl">
+        Enter the number: <input type="number" ng-model="num"><br><br>
+        <button ng-click="factorial()">Compute factorial</button>
+        <button ng-click="square()">Compute Square</button><br><br>
+        <p>result: {{result}}</p>
+    </div>
+    
+
+
+    <script>
+        var app = angular.module("mySqFct", []);
+        app.controller("mySqFctCtrl", ($scope)=>{
+            $scope.num = 0;
+            $scope.result = 0;
+            $scope.factorial = () =>{
+                if($scope.num == 0){
+                    $scope.result = 1;
+                }
+                else{
+                    $scope.fact = 1;
+                    for(var i = $scope.num; i >=1; i--){
+                        $scope.fact = $scope.fact * i;
+                    }
+                }
+                $scope.result = $scope.fact;
+            }
+            $scope.square = () =>{
+                $scope.result = $scope.num * $scope.num;
+            }
+        })
+    </script>
+</body>
+</html>
