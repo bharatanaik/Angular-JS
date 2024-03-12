@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<title>ItemManagementApplication</title>
+
+<head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">
+    </script>
+
+    <script>
+        var app = angular.module("itemMgmtApp", []);
+        app.controller("itemMgmtAppCntrl", function ($scope) {
+            $scope.itemList = ['Pen', 'Pencil', 'Eraser', 'Book']
+
+
+            $scope.addItem = function () {
+                if ($scope.newItem) {
+                    if ($scope.itemList.indexOf($scope.newItem) == -1) {
+                        $scope.itemList.push($scope.newItem)
+                    }
+                    else {
+                        alert('This item is already there in the itemcollection')
+                    }
+                }
+                else {
+                    alert('Please Enter the  itemtoadd')
+                }
+            }
+
+            $scope.removeItem = function (item) {
+                var yes = confirm("Are you sure want to delete" + item)
+                if (yes == true) {
+                    var index = $scope.itemList.indexOf(item)
+                    $scope.itemList.splice(index, 1)
+                }
+            }
+        });
+    </script>
+</head>
+
+<body ng-app="itemMgmtApp">
+    <h1>ItemManagementApplication</h1>
+
+    <div ng-controller="itemMgmtAppCntrl">
+        Enteranitemtoadd:<input type="text" ng-model="newItem">
+        <button ng-click="addItem()">ADD</button>
+        <br /><br />
+
+        <b>ListofItems</b>
+        <table border="1">
+            <tr>
+                <th>SLNO</th>
+                <th>Item</th>
+                <th>Remove</th>
+            </tr>
+            <tr ng-repeat="item in itemList">
+                <td>{{$index+1}}</td>
+                <td>{{item}}</td>
+                <td><button ng-click=removeItem(item)>Remove</button></td>
+
+                </tr>
+        </table>
+        <br />
+
+        Total Number of Items=<b>{{itemList.length}}</b>
+    </div>
+
+</body>
+
+</html>
